@@ -1,7 +1,5 @@
-// src/PaintingList.js
-
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom'; // Import Link
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import './PaintingList.css'; 
 
@@ -25,6 +23,9 @@ function PaintingList() {
     return (
         <div>
             <h1>Paintings</h1>
+            <Link to="/create">
+                <button>Create New Painting</button>
+            </Link>
             <div className="painting-grid">
                 {paintings.map(painting => (
                     <div key={painting.id} className="painting-item">
@@ -35,7 +36,7 @@ function PaintingList() {
                             <p> Artist: {painting.Artist}</p>
                             <p> Description: {painting.Description}</p>
                             <p> Price: {painting.Price}</p>
-                            <Link to={`/painting/${painting.ID}`}><img src={painting.image_url} alt={painting.title} /></Link> {/* Add Link to navigate to PaintingDetails */}
+                            <Link to={`/painting/${painting.ID}`}><img src={painting.image_url} alt={painting.title} /></Link>
                         </div>
                     </div>
                 ))}
