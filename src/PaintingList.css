@@ -26,5 +26,5 @@
 .painting-box img {
     width: 100%;
     height: auto;
-    max-height: 200px; /* Adjust the maximum height of the image */
+    max-height: 400px; /* Adjust the maximum height of the image */
 }

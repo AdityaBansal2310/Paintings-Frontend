@@ -1,4 +1,7 @@
+// src/PaintingList.js
+
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom'; // Import Link
 import axios from 'axios';
 import './PaintingList.css'; 
 
@@ -32,7 +35,7 @@ function PaintingList() {
                             <p> Artist: {painting.Artist}</p>
                             <p> Description: {painting.Description}</p>
                             <p> Price: {painting.Price}</p>
-                            <img src={painting.image_url} alt={painting.title} />
+                            <Link to={`/painting/${painting.ID}`}><img src={painting.image_url} alt={painting.title} /></Link> {/* Add Link to navigate to PaintingDetails */}
                         </div>
                     </div>
                 ))}
