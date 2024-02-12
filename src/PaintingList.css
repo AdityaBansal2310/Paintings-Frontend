@@ -1,0 +1,16 @@
+.painting-grid {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.painting-item {
+    flex: 0 0 33%; /* Adjust the width as per your preference */
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.painting-item img {
+    width: 100%;
+    height: auto;
+    max-height: 200px; /* Adjust the maximum height of the image */
+}
