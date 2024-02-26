@@ -23,6 +23,16 @@ function PaintingList() {
     return (
         <div>
             <h1>Paintings</h1>
+            <div>
+                {/* Link to the Register page */}
+                <Link to="/register">
+                    <button>Register</button>
+                </Link>
+                {/* Link to the Login page */}
+                <Link to="/login">
+                    <button>Login</button>
+                </Link>
+            </div>
             <Link to="/create">
                 <button>Create New Painting</button>
             </Link>
