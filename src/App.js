@@ -5,7 +5,7 @@ import PaintingDetails from './PaintingDetails';
 import CreatePainting from './CreatePainting'; 
 import RegisterComponent from './RegisterComponent'; 
 import LoginComponent from './LoginComponent'; 
-import LogoutComponent from './LogoutComponent';
+import LogoutComponent from './LogoutComponent'; 
 
 function App() {
     return (

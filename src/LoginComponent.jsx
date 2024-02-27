@@ -6,7 +6,6 @@ const LoginComponent = () => {
         username: '',
         password: ''
     });
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     const handleChange = e => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -17,20 +16,11 @@ const LoginComponent = () => {
         try {
             const response = await axios.post('http://localhost:8000/api/login/', formData);
             console.log(response.data);
-            
-            setIsLoggedIn(true);
-            
             localStorage.setItem('token', response.data.token);
+            window.location.href = 'http://localhost:3001/';
         } catch (error) {
             console.error(error);
         }
-    };
-
-    const handleLogout = () => {
-        
-        localStorage.removeItem('token');
-        
-        setIsLoggedIn(false);
     };
 
     return (
@@ -41,12 +31,6 @@ const LoginComponent = () => {
                 <input type="password" name="password" placeholder="Password" onChange={handleChange} />
                 <button type="submit">Login</button>
             </form>
-            {isLoggedIn ? (
-                <div>
-                    {/* Render logout button if isLoggedIn is true */}
-                    <button onClick={handleLogout}>Logout</button>
-                </div>
-            ) : null}
         </div>
     );
 };
