@@ -18,7 +18,14 @@ function PaintingDetails() {
     useEffect(() => {
         const fetchPainting = async () => {
             try {
-                const response = await axios.get(`http://127.0.0.1:8000/painting/${ID}`);
+                const token = localStorage.getItem('token');
+                const config = {
+                    headers: {
+                        'Authorization': `Token ${token}`
+                    }
+                };
+
+                const response = await axios.get(`http://127.0.0.1:8000/painting/${ID}`, config);
                 console.log('Painting data:', response.data); 
                 setPainting(response.data);
             } catch (error) {
@@ -31,7 +38,14 @@ function PaintingDetails() {
 
     const deletePainting = async () => {
         try {
-            await axios.delete(`http://127.0.0.1:8000/painting/${ID}`);
+            const token = localStorage.getItem('token');
+            const config = {
+                headers: {
+                    'Authorization': `Token ${token}`
+                }
+            };
+
+            await axios.delete(`http://127.0.0.1:8000/painting/${ID}/`, config);
             console.log('Painting deleted');
             setShowPopup(true); 
         } catch (error) {
@@ -57,10 +71,17 @@ function PaintingDetails() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.patch(`http://127.0.0.1:8000/painting/${ID}/`, updatedPaintingData);
+            const token = localStorage.getItem('token');
+            const config = {
+                headers: {
+                    'Authorization': `Token ${token}`
+                }
+            };
+
+            await axios.patch(`http://127.0.0.1:8000/painting/${ID}/`, updatedPaintingData, config);
             setEditingMode(false);
             // Refresh painting data after update
-            const response = await axios.get(`http://127.0.0.1:8000/painting/${ID}`);
+            const response = await axios.get(`http://127.0.0.1:8000/painting/${ID}`, config);
             setPainting(response.data);
         } catch (error) {
             console.error('Error updating painting:', error);
@@ -103,7 +124,7 @@ function PaintingDetails() {
                         <p>Artist: {painting.Artist}</p>
                         <p>Description: {painting.Description}</p>
                         <p>Price: {painting.Price}</p>
-                        <img src={painting.image_url} alt={painting.Titleitle} />
+                        <img src={painting.image_url} alt={painting.Title} />
                     </>
                 )}
                 {/* Conditionally render the pop-up */}
