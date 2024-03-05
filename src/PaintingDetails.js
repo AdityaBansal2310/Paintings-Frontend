@@ -12,7 +12,7 @@ function PaintingDetails() {
         Artist: '',
         Description: '',
         Price: '',
-        image_url: ''
+        image: ''
     });
 
     useEffect(() => {
@@ -60,7 +60,7 @@ function PaintingDetails() {
             Artist: painting.Artist,
             Description: painting.Description,
             Price: painting.Price,
-            image_url: painting.image_url
+            image: painting.image
         });
     };
 
@@ -112,8 +112,8 @@ function PaintingDetails() {
                             <input type="text" name="Price" value={updatedPaintingData.Price} onChange={handleChange} />
                         </div>
                         <div>
-                            <label>Image URL:</label>
-                            <input type="text" name="image_url" value={updatedPaintingData.image_url} onChange={handleChange} />
+                            <label>Image</label>
+                            <input type="text" name="image" value={updatedPaintingData.image} onChange={handleChange} />
                         </div>
                         <button type="submit">Save Changes</button>
                     </form>
@@ -124,7 +124,7 @@ function PaintingDetails() {
                         <p>Artist: {painting.Artist}</p>
                         <p>Description: {painting.Description}</p>
                         <p>Price: {painting.Price}</p>
-                        <img src={painting.image_url} alt={painting.Title} />
+                        <img src={`http://127.0.0.1:8000${painting.image}`} alt={painting.Title} />
                     </>
                 )}
                 {/* Conditionally render the pop-up */}

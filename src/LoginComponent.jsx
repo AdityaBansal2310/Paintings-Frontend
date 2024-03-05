@@ -17,7 +17,7 @@ const LoginComponent = () => {
             const response = await axios.post('http://localhost:8000/api/login/', formData);
             console.log(response.data);
             localStorage.setItem('token', response.data.token);
-            window.location.href = 'http://localhost:3001/';
+            window.location.href = 'http://localhost:3000/';
         } catch (error) {
             console.error(error);
         }

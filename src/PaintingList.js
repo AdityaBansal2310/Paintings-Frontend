@@ -47,16 +47,16 @@ function PaintingList() {
                     <button onClick={handleLogout}>Logout</button>
                     <div className="painting-grid">
                         {paintings.map(painting => (
-                            <div key={painting.id} className="painting-item">
+                            <div key={painting.ID} className="painting-item">
                                 <div className="painting-box">
-                                    <h2>{painting.title}</h2>
+                                    <h2>{painting.Title}</h2>
                                     <p>ID: {painting.ID}</p>
                                     <p>Title: {painting.Title}</p>
                                     <p>Artist: {painting.Artist}</p>
                                     <p>Description: {painting.Description}</p>
                                     <p>Price: {painting.Price}</p>
                                     <Link to={`/painting/${painting.ID}`}>
-                                        <img src={painting.image_url} alt={painting.title} />
+                                        <img src={`http://localhost:8000${painting.image}`} alt={painting.Title} />
                                     </Link>
                                 </div>
                             </div>
