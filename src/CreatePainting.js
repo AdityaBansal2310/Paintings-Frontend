@@ -42,9 +42,11 @@ function CreatePainting() {
 
     const addPainting = async (formData) => {
         try {
+            const token = localStorage.getItem('token'); // Retrieve the token from local storage
             const response = await axios.post('http://127.0.0.1:8000/painting/', formData, {
                 headers: {
-                    'Content-Type': 'multipart/form-data'
+                    'Content-Type': 'multipart/form-data',
+                    'Authorization': `Token ${token}` // Include the token in the request headers
                 }
             });
             console.log('New painting created:', response.data);
