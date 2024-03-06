@@ -12,7 +12,7 @@ function PaintingDetails() {
         Artist: '',
         Description: '',
         Price: '',
-        image: ''
+        image: null
     });
 
     useEffect(() => {
@@ -65,7 +65,11 @@ function PaintingDetails() {
     };
 
     const handleChange = (e) => {
-        setUpdatedPaintingData({ ...updatedPaintingData, [e.target.name]: e.target.value });
+        if (e.target.name === 'image') {
+            setUpdatedPaintingData({ ...updatedPaintingData, [e.target.name]: e.target.files[0] });
+        } else {
+            setUpdatedPaintingData({ ...updatedPaintingData, [e.target.name]: e.target.value });
+        }
     };
 
     const handleSubmit = async (e) => {
@@ -78,7 +82,14 @@ function PaintingDetails() {
                 }
             };
 
-            await axios.patch(`http://127.0.0.1:8000/painting/${ID}/`, updatedPaintingData, config);
+            const formData = new FormData();
+            formData.append('Title', updatedPaintingData.Title);
+            formData.append('Artist', updatedPaintingData.Artist);
+            formData.append('Description', updatedPaintingData.Description);
+            formData.append('Price', updatedPaintingData.Price);
+            formData.append('image', updatedPaintingData.image);
+
+            await axios.patch(`http://127.0.0.1:8000/painting/${ID}/`, formData, config);
             setEditingMode(false);
             // Refresh painting data after update
             const response = await axios.get(`http://127.0.0.1:8000/painting/${ID}`, config);
@@ -87,7 +98,6 @@ function PaintingDetails() {
             console.error('Error updating painting:', error);
         }
     };
-    
 
     return (
         <div>
@@ -112,8 +122,8 @@ function PaintingDetails() {
                             <input type="text" name="Price" value={updatedPaintingData.Price} onChange={handleChange} />
                         </div>
                         <div>
-                            <label>Image</label>
-                            <input type="text" name="image" value={updatedPaintingData.image} onChange={handleChange} />
+                            <label>Image:</label>
+                            <input type="file" name="image" onChange={handleChange} />
                         </div>
                         <button type="submit">Save Changes</button>
                     </form>
