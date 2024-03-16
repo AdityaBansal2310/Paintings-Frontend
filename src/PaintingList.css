@@ -31,10 +31,14 @@
 
 
 .card:hover {
-    transform: scale(1.05);
+    transform: scale(1.06);
     transition: transform 0.3s ease;
 }
 
+.painting-card:hover {
+    transform: scale(1.01);
+    transition: transform 0.2s ease;
+}
 
 
 .login-box button.btn {
