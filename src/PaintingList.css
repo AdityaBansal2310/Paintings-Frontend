@@ -28,3 +28,15 @@
     height: auto;
     max-height: 400px; /* Adjust the maximum height of the image */
 }
+
+
+.card:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+}
+
+
+
+.login-box button.btn {
+    margin-right: 10px !important;
+}

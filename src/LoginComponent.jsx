@@ -24,13 +24,21 @@ const LoginComponent = () => {
     };
 
     return (
-        <div>
-            <h2>Login</h2>
-            <form onSubmit={handleSubmit}>
-                <input type="text" name="username" placeholder="Username or Email" onChange={handleChange} />
-                <input type="password" name="password" placeholder="Password" onChange={handleChange} />
-                <button type="submit">Login</button>
-            </form>
+        <div className="container d-flex justify-content-center align-items-center vh-100">
+            <div className="card text-center" style={{ width: '400px', height: '250px' }}> {/* Adjust width and height as needed */}
+                <div className="card-body">
+                    <h2 className="card-title mb-4">Login</h2>
+                    <form onSubmit={handleSubmit}>
+                        <div className="mb-3">
+                            <input type="text" name="username" className="form-control" placeholder="Username or Email" onChange={handleChange} />
+                        </div>
+                        <div className="mb-3">
+                            <input type="password" name="password" className="form-control" placeholder="Password" onChange={handleChange} />
+                        </div>
+                        <button type="submit" className="btn btn-outline-primary">Login</button>
+                    </form>
+                </div>
+            </div>
         </div>
     );
 };

@@ -11,7 +11,7 @@ function App() {
     return (
         <Router>
             <div>
-                <h1>Arya's Collection</h1>
+                {/* <h1>Arya's Paintings</h1> */}
                 <Routes>
                     {/* Routes for painting-related components */}
                     <Route path="/" element={<PaintingList />} />

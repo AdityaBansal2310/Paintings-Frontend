@@ -143,8 +143,9 @@ function PaintingDetails() {
                         <p>Painting deleted successfully</p>
                     </div>
                 )}
-                <button onClick={deletePainting}>Delete Painting</button>
-                <button onClick={handleEdit}>Edit Painting</button>
+                <button onClick={handleEdit} class="btn btn-outline-info">Edit Painting</button>
+                <button onClick={deletePainting} class="btn btn-outline-danger">Delete Painting</button>
+                
             </div>
         </div>
     );
