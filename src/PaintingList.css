@@ -33,11 +33,11 @@
 }
 
 .card:hover {
-    transform: scale(1.06);
+    transform: scale(1.03); 
     transition: transform 0.3s ease;
 }
 
 .painting-card:hover {
-    transform: scale(1.01);
+    transform: scale(1); 
     transition: transform 0.2s ease;
 }
