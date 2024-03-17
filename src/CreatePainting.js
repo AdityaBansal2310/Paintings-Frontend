@@ -35,7 +35,7 @@ function CreatePainting() {
             formData.append('image', paintingData.image);
 
             await addPainting(formData);
-            navigate('/'); // Redirect to homepage after successful creation
+            navigate('/paintings/'); // Redirect to homepage after successful creation
         } catch (error) {
             console.error('Error creating new painting:', error);
         }
