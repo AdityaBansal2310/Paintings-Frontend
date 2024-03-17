@@ -1,0 +1,63 @@
+/* Custom styling for CreatePainting component */
+
+.create-painting-container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-floating {
+    position: relative;
+    margin-bottom: 1rem;
+}
+
+.form-floating input,
+.form-floating textarea {
+    padding: 0.5rem 1rem; /* Adjust padding as needed */
+    width: 300px; /* Set the desired width */
+}
+
+.form-floating label {
+    position: absolute;
+    top: 0;
+    left: 1rem; /* Adjust left position as needed */
+    padding: 0.25rem 0.5rem;
+    opacity: 0.5;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.form-floating input:focus~label,
+.form-floating input:not(:focus):valid~label,
+.form-floating textarea:focus~label,
+.form-floating textarea:not(:focus):valid~label {
+    transform: translateY(-1rem) scale(0.85);
+    opacity: 1;
+}
+
+.form-control-file {
+    padding: 0.5rem 1rem; /* Adjust padding as needed */
+    width: calc(100% - 110px); /* Adjust width to prevent overlapping */
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+
+.create-painting-form {
+    width: 400px; /* Set the desired width */
+    padding: 50px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center; /* Center the text horizontally */
+}
+
+
+.create-painting-form h1 {
+    margin-bottom: 30px; /* Add some space below the heading */
+    font-size: 30px; /* Adjust the font size as needed */
+}

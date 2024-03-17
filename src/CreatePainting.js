@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import './CreatePainting.css'; // Import custom CSS for styling
 
 function CreatePainting() {
     const [paintingData, setPaintingData] = useState({
@@ -57,35 +58,39 @@ function CreatePainting() {
     };
 
     return (
-        <div>
-            <h1>Create New Painting</h1>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label>ID:</label>
-                    <input type="text" name="ID" value={paintingData.ID} onChange={handleChange} />
-                </div>
-                <div>
-                    <label>Title:</label>
-                    <input type="text" name="Title" value={paintingData.Title} onChange={handleChange} />
-                </div>
-                <div>
-                    <label>Artist:</label>
-                    <input type="text" name="Artist" value={paintingData.Artist} onChange={handleChange} />
-                </div>
-                <div>
-                    <label>Description:</label>
-                    <textarea name="Description" value={paintingData.Description} onChange={handleChange} />
-                </div>
-                <div>
-                    <label>Price:</label>
-                    <input type="text" name="Price" value={paintingData.Price} onChange={handleChange} />
-                </div>
-                <div>
-                    <label>Image</label>
-                    <input type="file" name="image" onChange={handleChange} /> {/* Use type="file" for file upload */}
-                </div>
-                <button type="submit">Add Painting</button>
-            </form>
+        <div className="create-painting-container">
+            <div className="create-painting-form">
+                <h1>Create new Painting</h1>
+                <form onSubmit={handleSubmit}>
+                    <div className="form-floating mb-3">
+                        <input type="text" className="form-control floating-input" id="floatingID" name="ID" value={paintingData.ID} onChange={handleChange} />
+                        <label htmlFor="floatingID">ID</label>
+                    </div>
+                    <div className="form-floating mb-3">
+                        <input type="text" className="form-control floating-input" id="floatingTitle" name="Title" value={paintingData.Title} onChange={handleChange} />
+                        <label htmlFor="floatingTitle">Title</label>
+                    </div>
+                    <div className="form-floating mb-3">
+                        <input type="text" className="form-control floating-input" id="floatingArtist" name="Artist" value={paintingData.Artist} onChange={handleChange} />
+                        <label htmlFor="floatingArtist">Artist</label>
+                    </div>
+                    <div className="form-floating mb-3">
+                        <textarea className="form-control floating-input" id="floatingDescription" name="Description" value={paintingData.Description} onChange={handleChange} />
+                        <label htmlFor="floatingDescription">Description</label>
+                    </div>
+                    <div className="form-floating mb-3">
+                        <input type="text" className="form-control floating-input" id="floatingPrice" name="Price" value={paintingData.Price} onChange={handleChange} />
+                        <label htmlFor="floatingPrice">Price</label>
+                    </div>
+                    <div className="form-floating mb-3">
+                        <label htmlFor="formFileSm" className="form-label"></label>
+                        <input className="form-control form-control-sm" id="formFileSm" type="file" name="image" onChange={handleChange} />
+                    </div>
+                    <div className="button-container">
+                        <button type="submit" className="btn btn-primary">Add Painting</button>
+                    </div>
+                </form>
+            </div>
         </div>
     );
 }
