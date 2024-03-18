@@ -16,6 +16,9 @@
     border: 1px solid #ccc;
     padding: 10px;
     margin-bottom: 20px;
+    display: flex; /* Use flexbox to center items horizontally */
+    flex-direction: column; /* Align items vertically */
+    align-items: center; /* Center items horizontally */
 }
 
 .painting-box h2 {
@@ -30,6 +33,7 @@
     width: 100%;
     height: auto;
     max-height: 400px; /* Adjust the maximum height of the image */
+    object-fit: cover; /* Ensure the image covers its container */
 }
 
 .card:hover {
@@ -40,4 +44,16 @@
 .painting-card:hover {
     transform: scale(1); 
     transition: transform 0.2s ease;
+}
+
+.painting-image {
+    width: 200px; /* Set the width as per your requirement */
+    height: 500px; /* Set the height as per your requirement */
+    object-fit: cover; /* Ensure the image covers the specified dimensions */
+}
+
+.painting-image-container {
+    width: 350px; /* Set the width as per your requirement */
+    height: 350px; /* Set the height as per your requirement */
+    overflow: hidden; /* Ensure the image doesn't overflow its container */
 }

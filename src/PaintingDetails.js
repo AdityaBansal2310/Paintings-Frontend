@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom'; // Import useParams hook
+import './PaintingDetails.css'; // Import custom CSS for styling
+import EditPaintingForm from './EditPaintingForm'; // Import the EditPaintingForm component
 
 function PaintingDetails() {
     const { ID } = useParams(); // Use useParams hook to get route parameters
@@ -100,33 +102,20 @@ function PaintingDetails() {
     };
 
     return (
-        <div>
-            <h1>Painting Details</h1>
-            <div className="painting-details">
+        <div className="painting-details-container">
+            <div className="image-container">
+                <img src={`http://127.0.0.1:8000${painting.image}`} alt={painting.Title} />
+            </div>
+            <div className="details-box">
                 {editingMode ? (
-                    <form onSubmit={handleSubmit}>
-                        <div>
-                            <label>Title:</label>
-                            <input type="text" name="Title" value={updatedPaintingData.Title} onChange={handleChange} />
-                        </div>
-                        <div>
-                            <label>Artist:</label>
-                            <input type="text" name="Artist" value={updatedPaintingData.Artist} onChange={handleChange} />
-                        </div>
-                        <div>
-                            <label>Description:</label>
-                            <textarea name="Description" value={updatedPaintingData.Description} onChange={handleChange} />
-                        </div>
-                        <div>
-                            <label>Price:</label>
-                            <input type="text" name="Price" value={updatedPaintingData.Price} onChange={handleChange} />
-                        </div>
-                        <div>
-                            <label>Image:</label>
-                            <input type="file" name="image" onChange={handleChange} />
-                        </div>
-                        <button type="submit">Save Changes</button>
-                    </form>
+                    <div className="edit-painting-form"> {/* Apply the edit-painting-form class here */}
+                        <EditPaintingForm 
+                            painting={painting}
+                            updatedPaintingData={updatedPaintingData}
+                            handleChange={handleChange}
+                            handleSubmit={handleSubmit}
+                        />
+                    </div>
                 ) : (
                     <>
                         <h2>{painting.Title}</h2>
@@ -134,7 +123,6 @@ function PaintingDetails() {
                         <p>Artist: {painting.Artist}</p>
                         <p>Description: {painting.Description}</p>
                         <p>Price: {painting.Price}</p>
-                        <img src={`http://127.0.0.1:8000${painting.image}`} alt={painting.Title} />
                     </>
                 )}
                 {/* Conditionally render the pop-up */}
@@ -143,9 +131,10 @@ function PaintingDetails() {
                         <p>Painting deleted successfully</p>
                     </div>
                 )}
-                <button onClick={handleEdit} class="btn btn-outline-info">Edit Painting</button>
-                <button onClick={deletePainting} class="btn btn-outline-danger">Delete Painting</button>
-                
+                <div className="buttons-container">
+                    <button onClick={handleEdit} className="btn btn-outline-info">Edit Painting</button>
+                    <button onClick={deletePainting} className="btn btn-outline-danger">Delete Painting</button>
+                </div>
             </div>
         </div>
     );

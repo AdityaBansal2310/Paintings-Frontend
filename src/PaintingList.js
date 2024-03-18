@@ -66,7 +66,13 @@ function PaintingList() {
                                                     <p>Description: {painting.Description}</p>
                                                     <p>Price: {painting.Price}</p>
                                                     <Link to={`/painting/${painting.ID}`}>
-                                                        <img src={`http://localhost:8000${painting.image}`} alt={painting.Title} />
+                                                        <div className="painting-image-container">
+                                                            <img
+                                                                src={`http://localhost:8000${painting.image}`}
+                                                                alt={painting.Title}
+                                                                className="painting-image"
+                                                            />
+                                                        </div>
                                                     </Link>
                                                 </div>
                                             </div>
