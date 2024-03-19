@@ -23,7 +23,9 @@ function EditPaintingForm({ painting, updatedPaintingData, handleChange, handleS
                 <label htmlFor="image" className="form-label">Image:</label>
                 <input type="file" id="image" className="form-control" name="image" onChange={handleChange} />
             </div>
-            <button type="submit" className="btn btn-primary">Save Changes</button>
+            <div className="text-center"> {/* Wrapping the button in a div with text-center class */}
+                <button type="submit" className="btn btn-primary">Save Changes</button>
+            </div>
         </form>
     );
 }
