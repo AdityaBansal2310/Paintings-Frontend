@@ -57,3 +57,21 @@
     height: 350px; /* Set the height as per your requirement */
     overflow: hidden; /* Ensure the image doesn't overflow its container */
 }
+
+
+.btn-like {
+    background: none;
+    border: none;
+    padding: 0;
+    margin-right: 10px; /* Adjust margin as needed */
+    cursor: pointer;
+    outline: none;
+}
+
+.btn-like:focus {
+    outline: none;
+}
+
+.liked {
+    color: red; /* Change color to red for liked paintings */
+}

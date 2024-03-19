@@ -3,10 +3,13 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './PaintingList.css'; // Import custom CSS for styling
 import LoginRegister from './LoginRegister'; // Import LoginRegister component
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart } from '@fortawesome/free-solid-svg-icons';
 
 function PaintingList() {
     const [paintings, setPaintings] = useState([]);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [likeMessages, setLikeMessages] = useState({}); // State for like messages
     const navigate = useNavigate(); // Initialize useNavigate hook
 
     useEffect(() => {
@@ -34,6 +37,57 @@ function PaintingList() {
             console.error('Error fetching paintings:', error);
         }
     };
+
+    const handleLike = async (paintingID) => {
+        try {
+            const token = localStorage.getItem('token');
+    
+            // Check if the user has already liked the painting
+            const response = await axios.get(`http://127.0.0.1:8000/painting/${paintingID}/`, {
+                headers: {
+                    Authorization: `Token ${token}`,
+                },
+            });
+            const paintingData = response.data;
+            const userHasLiked = paintingData.user_has_liked;
+    
+            if (userHasLiked) {
+                setLikeMessages(prevMessages => ({
+                    ...prevMessages,
+                    [paintingID]: 'You have already liked this painting.'
+                }));
+                return;
+            }
+    
+            // If user has not already liked the painting, proceed with liking
+            await axios.post(`http://127.0.0.1:8000/painting/${paintingID}/like/`, {}, {
+                headers: {
+                    Authorization: `Token ${token}`,
+                },
+            });
+    
+            setLikeMessages(prevMessages => ({
+                ...prevMessages,
+                [paintingID]: 'Painting liked successfully.'
+            }));
+    
+            // Update the likes count for the painting
+            setPaintings(prevPaintings => prevPaintings.map(painting => {
+                if (painting.ID === paintingID) {
+                    painting.likes_count++;
+                    painting.user_has_liked = true; // Update user_has_liked flag
+                }
+                return painting;
+            }));
+        } catch (error) {
+            console.error('Error liking painting:', error);
+            setLikeMessages(prevMessages => ({
+                ...prevMessages,
+                [paintingID]: 'Error encountered while liking painting.'
+            }));
+        }
+    };
+    
 
     const handleLogout = () => {
         localStorage.removeItem('token');
@@ -70,10 +124,16 @@ function PaintingList() {
                                                             <img
                                                                 src={`http://localhost:8000${painting.image}`}
                                                                 alt={painting.Title}
-                                                                className="painting-image"
-                                                            />
-                                                        </div>
+                                                                className="painting-image"/>
+                                                                </div>
                                                     </Link>
+                                                    <div className="d-flex align-items-center">
+                                                        <button onClick={() => handleLike(painting.ID)} className="btn btn-like">
+                                                            <FontAwesomeIcon icon={faHeart} className={`heart-icon ${painting.user_has_liked ? 'liked' : ''}`} style={{ fontSize: '22px' }} />
+                                                        </button>
+                                                        <p className="ml-2 mb-0">Likes: {painting.likes_count}</p>
+                                                    </div>
+                                                    {likeMessages[painting.ID] && <p className="like-message">{likeMessages[painting.ID]}</p>}
                                                 </div>
                                             </div>
                                         ))}
