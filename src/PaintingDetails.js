@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom'; // Import useParams hook
-import './PaintingDetails.css'; // Import custom CSS for styling
-import EditPaintingForm from './EditPaintingForm'; // Import the EditPaintingForm component
+import { useParams } from 'react-router-dom';
+import './PaintingDetails.css';
+import EditPaintingForm from './EditPaintingForm';
 
 function PaintingDetails() {
-    const { ID } = useParams(); // Use useParams hook to get route parameters
+    const { ID } = useParams();
     const [painting, setPainting] = useState({});
-    const [showPopup, setShowPopup] = useState(false); // State to control the visibility of the pop-up
+    const [showPopup, setShowPopup] = useState(false);
     const [editingMode, setEditingMode] = useState(false);
     const [updatedPaintingData, setUpdatedPaintingData] = useState({
         Title: '',
@@ -28,13 +28,12 @@ function PaintingDetails() {
                 };
 
                 const response = await axios.get(`http://127.0.0.1:8000/painting/${ID}`, config);
-                console.log('Painting data:', response.data); 
                 setPainting(response.data);
             } catch (error) {
                 console.error('Error fetching painting:', error);
             }
         };
-    
+
         fetchPainting();
     }, [ID]);
 
@@ -48,8 +47,7 @@ function PaintingDetails() {
             };
 
             await axios.delete(`http://127.0.0.1:8000/painting/${ID}/`, config);
-            console.log('Painting deleted');
-            setShowPopup(true); 
+            setShowPopup(true);
         } catch (error) {
             console.error('Error deleting painting:', error);
         }
@@ -93,7 +91,6 @@ function PaintingDetails() {
 
             await axios.patch(`http://127.0.0.1:8000/painting/${ID}/`, formData, config);
             setEditingMode(false);
-            // Refresh painting data after update
             const response = await axios.get(`http://127.0.0.1:8000/painting/${ID}`, config);
             setPainting(response.data);
         } catch (error) {
@@ -108,8 +105,8 @@ function PaintingDetails() {
             </div>
             <div className="details-box">
                 {editingMode ? (
-                    <div className="edit-painting-form"> {/* Apply the edit-painting-form class here */}
-                        <EditPaintingForm 
+                    <div className="edit-painting-form">
+                        <EditPaintingForm
                             painting={painting}
                             updatedPaintingData={updatedPaintingData}
                             handleChange={handleChange}
@@ -123,18 +120,17 @@ function PaintingDetails() {
                         <p>Artist: {painting.Artist}</p>
                         <p>Description: {painting.Description}</p>
                         <p>Price: {painting.Price}</p>
+                        <div className="buttons-container">
+                            <button onClick={handleEdit} className="btn btn-outline-info">Edit Painting</button>
+                            <button onClick={deletePainting} className="btn btn-outline-danger">Delete Painting</button>
+                        </div>
                     </>
                 )}
-                {/* Conditionally render the pop-up */}
                 {showPopup && (
                     <div className="popup">
                         <p>Painting deleted successfully</p>
                     </div>
                 )}
-                <div className="buttons-container">
-                    <button onClick={handleEdit} className="btn btn-outline-info">Edit Painting</button>
-                    <button onClick={deletePainting} className="btn btn-outline-danger">Delete Painting</button>
-                </div>
             </div>
         </div>
     );
