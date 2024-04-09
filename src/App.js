@@ -1,15 +1,15 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
-import Navbar from './Navbar';
-import Footer from './Footer'; // Import Footer component
-import PaintingList from './PaintingList';
-import PaintingDetails from './PaintingDetails';
-import CreatePainting from './CreatePainting'; 
-import RegisterComponent from './RegisterComponent'; 
-import LoginComponent from './LoginComponent'; 
-import LogoutComponent from './LogoutComponent'; 
-import LoginRegister from './LoginRegister'; // Import LoginRegister component
+import Navbar from './static/Navbar';
+import Footer from './static/Footer'; // Import Footer component
+import PaintingList from './painting/PaintingList';
+import PaintingDetails from './painting/PaintingDetails';
+import CreatePainting from './painting/CreatePainting'; 
+import RegisterComponent from './user/RegisterComponent'; 
+import LoginComponent from './user/LoginComponent'; 
+import LogoutComponent from './user/LogoutComponent'; 
+import LoginRegister from './user/LoginRegister'; // Import LoginRegister component
 
 function App() {
     return (
