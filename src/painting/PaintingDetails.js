@@ -18,6 +18,7 @@ function PaintingDetails() {
         Price: '',
         image: null
     });
+    const [comments, setComments] = useState([]);
 
     useEffect(() => {
         const fetchPainting = async () => {
@@ -36,7 +37,24 @@ function PaintingDetails() {
             }
         };
 
+        const fetchComments = async () => {
+            try {
+                const token = localStorage.getItem('token');
+                const config = {
+                    headers: {
+                        'Authorization': `Token ${token}`
+                    }
+                };
+
+                const response = await axios.get(`http://127.0.0.1:8000/painting/${ID}/comment/`, config);
+                setComments(response.data);
+            } catch (error) {
+                console.error('Error fetching comments:', error);
+            }
+        };
+
         fetchPainting();
+        fetchComments();
     }, [ID]);
 
     const deletePainting = async () => {
@@ -133,6 +151,17 @@ function PaintingDetails() {
                         <p>Painting deleted successfully</p>
                     </div>
                 )}
+                {/* Display comments */}
+                <div className="comments">
+                    <h3>Comments</h3>
+                    {comments.map(comment => (
+                        <div key={comment.id} className="comment">
+                            <p>{comment.text}</p>
+                        </div>
+                    ))}
+                </div>
+                {/* Render CommentForm component and pass paintingId and setComments as props */}
+                <CommentForm paintingId={ID} setComments={setComments} />
             </div>
         </div>
     );
