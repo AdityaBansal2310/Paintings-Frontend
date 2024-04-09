@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import './PaintingDetails.css';
+import '../css/style.css';
+import "../css/PaintingDetails.css";
 import EditPaintingForm from './EditPaintingForm';
+import CommentForm from './CommentForm';
 
 function PaintingDetails() {
     const { ID } = useParams();
