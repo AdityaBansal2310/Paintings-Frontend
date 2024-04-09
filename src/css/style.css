@@ -1,0 +1,83 @@
+a button 
+{
+margin-right: 4cqb;
+}
+
+.body {
+    margin: 0;
+    padding: 0;
+}
+
+.footer {
+    margin: 50px;
+    padding: 0cap;
+}
+
+.comment-form
+{
+    border: 0;
+}
+
+.comments-box {
+    width: 100%;
+    max-width: 100%;
+    bottom: -80px;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 0px solid #ccc;
+    padding: 20px;
+    z-index: 9999; /* Ensure the comments box stays above other content */
+}
+
+.painting-details-container1 {
+    width: 100%;
+    background-color: #dc3545;
+    display: flex;
+}
+
+.painting-details-container1 .image-container1 {
+    width: 50%;
+    height: 50%;
+    background-color: green;
+    justify-content: center; /* Center the image horizontally */
+    align-items: center; /* Center the image vertically */
+}
+
+.painting-details-container1 .details-box1 {    
+    width: 50%;
+    background-color: yellow;
+}
+
+
+textarea {
+    width: 100%;
+}
+
+.comment-form h3{
+    width: 100%;
+}
+
+.comment-form textarea{
+    width: 100%;
+}
+
+.comment {
+    margin-bottom: 10px;
+    border: none;
+}
+
+.comment p {
+    margin-bottom: 5px;
+}
+
+.comment button {
+    padding: 5px 10px;
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.comment button:hover {
+    background-color: #c82333;
+}
