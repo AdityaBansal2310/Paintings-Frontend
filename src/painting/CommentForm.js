@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import axios from 'axios';
 import '../css/style.css';
@@ -34,16 +33,15 @@ const CommentForm = ({ paintingId, setComments }) => {
 
     return (
         <div className="comment-form">
-            <h3>Add a Comment</h3>
-            <form onSubmit={handleSubmit}>
-                <textarea value={text} onChange={handleChange} placeholder="Enter your comment..." required></textarea>
-                <div className="submit-button">
-                    <button type="submit" className="btn btn-primary">Submit</button>
-                </div>
-            </form>
+            <div className="comment-input">
+                <h3>Add a Comment</h3>
+                <form onSubmit={handleSubmit}>
+                    <textarea value={text} onChange={handleChange} placeholder="Enter your comment..." required></textarea>
+                    <button type="submit" className="btn btn-primary">Add Comment</button>
+                </form>
+            </div>
         </div>
     );
 }
 
 export default CommentForm;
-

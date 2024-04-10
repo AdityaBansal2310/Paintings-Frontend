@@ -1,6 +1,7 @@
+/*
 a button 
 {
-margin-right: 4cqb;
+    margin-right: 4cqb;
 }
 
 .body {
@@ -26,7 +27,7 @@ margin-right: 4cqb;
     transform: translateX(-50%);
     border: 0px solid #ccc;
     padding: 20px;
-    z-index: 9999; /* Ensure the comments box stays above other content */
+    z-index: 9999; 
 }
 
 .painting-details-container1 {
@@ -39,8 +40,8 @@ margin-right: 4cqb;
     width: 50%;
     height: 50%;
     background-color: green;
-    justify-content: center; /* Center the image horizontally */
-    align-items: center; /* Center the image vertically */
+    justify-content: center; 
+    align-items: center; 
 }
 
 .painting-details-container1 .details-box1 {    
@@ -81,3 +82,4 @@ textarea {
 .comment button:hover {
     background-color: #c82333;
 }
+*/

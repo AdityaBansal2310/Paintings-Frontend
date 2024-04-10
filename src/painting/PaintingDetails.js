@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import '../css/style.css';
-import "../css/PaintingDetails.css";
+import '../css/PaintingDetails.css'; // Add missing import for PaintingDetails.css
 import EditPaintingForm from './EditPaintingForm';
 import CommentForm from './CommentForm';
 
@@ -120,38 +120,41 @@ function PaintingDetails() {
 
     return (
         <div className="painting-details-container">
-            <div className="image-container">
-                <img src={`http://127.0.0.1:8000${painting.image}`} alt={painting.Title} />
-            </div>
-            <div className="details-box">
-                {editingMode ? (
-                    <div className="edit-painting-form">
-                        <EditPaintingForm
-                            painting={painting}
-                            updatedPaintingData={updatedPaintingData}
-                            handleChange={handleChange}
-                            handleSubmit={handleSubmit}
-                        />
-                    </div>
-                ) : (
-                    <>
-                        <h2>{painting.Title}</h2>
-                        <p>Title: {painting.Title}</p>
-                        <p>Artist: {painting.Artist}</p>
-                        <p>Description: {painting.Description}</p>
-                        <p>Price: {painting.Price}</p>
-                        <div className="buttons-container">
-                            <button onClick={handleEdit} className="btn btn-outline-info">Edit Painting</button>
-                            <button onClick={deletePainting} className="btn btn-outline-danger">Delete Painting</button>
+            <div className="image-comments-container">
+                <div className="image-container">
+                    <img src={`http://127.0.0.1:8000${painting.image}`} alt={painting.Title} />
+                </div>
+                <div className="details-box">
+                    {editingMode ? (
+                        <div className="edit-painting-form">
+                            <EditPaintingForm
+                                painting={painting}
+                                updatedPaintingData={updatedPaintingData}
+                                handleChange={handleChange}
+                                handleSubmit={handleSubmit}
+                            />
                         </div>
-                    </>
-                )}
-                {showPopup && (
-                    <div className="popup">
-                        <p>Painting deleted successfully</p>
-                    </div>
-                )}
-                {/* Display comments */}
+                    ) : (
+                        <>
+                            <h2>{painting.Title}</h2>
+                            <p>Title: {painting.Title}</p>
+                            <p>Artist: {painting.Artist}</p>
+                            <p>Description: {painting.Description}</p>
+                            <p>Price: {painting.Price}</p>
+                            <div className="buttons-container">
+                                <button onClick={handleEdit} className="btn btn-outline-info">Edit Painting</button>
+                                <button onClick={deletePainting} className="btn btn-outline-danger">Delete Painting</button>
+                            </div>
+                        </>
+                    )}
+                    {showPopup && (
+                        <div className="popup">
+                            <p>Painting deleted successfully</p>
+                        </div>
+                    )}
+                </div>
+            </div>
+            <div className="comments-container">
                 <div className="comments">
                     <h3>Comments</h3>
                     {comments.map(comment => (
