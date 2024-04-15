@@ -6,6 +6,7 @@ const LoginComponent = () => {
         username: '',
         password: ''
     });
+    const [showErrorModal, setShowErrorModal] = useState(false);
 
     const handleChange = e => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -19,7 +20,7 @@ const LoginComponent = () => {
             localStorage.setItem('token', response.data.token);
             window.location.href = 'http://localhost:3000/paintings';
         } catch (error) {
-            console.error(error);
+            setShowErrorModal(true);
         }
     };
 
@@ -37,6 +38,24 @@ const LoginComponent = () => {
                         </div>
                         <button type="submit" className="btn btn-outline-primary">Login</button>
                     </form>
+                </div>
+            </div>
+
+            {/* Error Modal */}
+            <div className={`modal fade ${showErrorModal ? 'show' : ''}`} style={{ display: showErrorModal ? 'block' : 'none' }}>
+                <div className="modal-dialog modal-dialog-centered">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h5 className="modal-title">Error</h5>
+                            <button type="button" className="btn-close" onClick={() => setShowErrorModal(false)}></button>
+                        </div>
+                        <div className="modal-body">
+                            <p>Invalid username or password. Please try again.</p>
+                        </div>
+                        <div className="modal-footer">
+                            <button type="button" className="btn btn-primary" onClick={() => setShowErrorModal(false)}>Close</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

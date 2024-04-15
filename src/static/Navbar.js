@@ -1,14 +1,21 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 function Navbar() {
+    const location = useLocation();
+
+    const isPaintingListPage = location.pathname === '/paintings';
+
     return (
         <nav className="navbar bg-dark border-bottom border-body" data-bs-theme="dark">
             <div className="container-fluid d-flex justify-content-between">
                 <ul className="navbar-nav flex-row gap-4">
-                    <li className="nav-item">
-                        <Link to="/" className="nav-link">Home</Link>
-                    </li>
+                    {/* Only render Home link if not on painting list page */}
+                    {!isPaintingListPage && (
+                        <li className="nav-item">
+                            <Link to="/paintings" className="nav-link">Home</Link>
+                        </li>
+                    )}
                     <li className="nav-item">
                         <Link to="/about" className="nav-link">About</Link>
                     </li>
