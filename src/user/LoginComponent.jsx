@@ -15,10 +15,13 @@ const LoginComponent = () => {
     const handleSubmit = async e => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:8000/api/login/', formData);
+            const api_url = process.env.REACT_APP_API_URL;
+            const frontend_url = process.env.REACT_APP_FRONTEND_URL;
+            const complete_url = api_url.concat('/api/login/');
+            const response = await axios.post(complete_url, formData);
             console.log(response.data);
             localStorage.setItem('token', response.data.token);
-            window.location.href = 'http://localhost:3000/paintings';
+            window.location.href = frontend_url+ "/paintings" ;
         } catch (error) {
             setShowErrorModal(true);
         }

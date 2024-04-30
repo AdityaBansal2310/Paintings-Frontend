@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import '../css/style.css';
-import '../css/PaintingDetails.css'; // Add missing import for PaintingDetails.css
+import '../css/PaintingDetails.css';
 import EditPaintingForm from './EditPaintingForm';
 import CommentForm from './CommentForm';
 
@@ -30,7 +30,7 @@ function PaintingDetails() {
                     }
                 };
 
-                const response = await axios.get(`http://127.0.0.1:8000/painting/${ID}`, config);
+                const response = await axios.get(`${process.env.REACT_APP_API_URL}/painting/${ID}`, config);
                 setPainting(response.data);
             } catch (error) {
                 console.error('Error fetching painting:', error);
@@ -46,7 +46,7 @@ function PaintingDetails() {
                     }
                 };
 
-                const response = await axios.get(`http://127.0.0.1:8000/painting/${ID}/comment/`, config);
+                const response = await axios.get(`${process.env.REACT_APP_API_URL}/painting/${ID}/comment/`, config);
                 setComments(response.data);
             } catch (error) {
                 console.error('Error fetching comments:', error);
@@ -66,7 +66,7 @@ function PaintingDetails() {
                 }
             };
 
-            await axios.delete(`http://127.0.0.1:8000/painting/${ID}/`, config);
+            await axios.delete(`${process.env.REACT_APP_API_URL}/painting/${ID}/`, config);
             setShowPopup(true);
         } catch (error) {
             console.error('Error deleting painting:', error);
@@ -109,9 +109,9 @@ function PaintingDetails() {
             formData.append('Price', updatedPaintingData.Price);
             formData.append('image', updatedPaintingData.image);
 
-            await axios.patch(`http://127.0.0.1:8000/painting/${ID}/`, formData, config);
+            await axios.patch(`${process.env.REACT_APP_API_URL}/painting/${ID}/`, formData, config);
             setEditingMode(false);
-            const response = await axios.get(`http://127.0.0.1:8000/painting/${ID}`, config);
+            const response = await axios.get(`${process.env.REACT_APP_API_URL}/painting/${ID}`, config);
             setPainting(response.data);
         } catch (error) {
             console.error('Error updating painting:', error);
@@ -122,7 +122,7 @@ function PaintingDetails() {
         <div className="painting-details-container">
             <div className="image-comments-container">
                 <div className="image-container">
-                    <img src={`http://127.0.0.1:8000${painting.image}`} alt={painting.Title} />
+                    <img src={`${process.env.REACT_APP_API_URL}${painting.image}`} alt={painting.Title} />
                 </div>
                 <div className="details-box">
                     {editingMode ? (
@@ -163,7 +163,6 @@ function PaintingDetails() {
                         </div>
                     ))}
                 </div>
-                {/* Render CommentForm component and pass paintingId and setComments as props */}
                 <CommentForm paintingId={ID} setComments={setComments} />
             </div>
         </div>

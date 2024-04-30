@@ -7,7 +7,7 @@ const LogoutComponent = () => {
             const token = localStorage.getItem('token');
             if (token) {
                 const response = await axios.post(
-                    'http://localhost:8000/api/logout/',
+                    `${process.env.REACT_APP_API_URL}/api/logout/`,
                     null,
                     {
                         headers: {

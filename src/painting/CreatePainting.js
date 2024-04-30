@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import '../css/style.css';
-import '../css/CreatePainting.css'; // Import custom CSS for styling
+import '../css/CreatePainting.css';
 
 function CreatePainting() {
     const [paintingData, setPaintingData] = useState({
@@ -14,7 +14,7 @@ function CreatePainting() {
         image: null 
     });
 
-    const navigate = useNavigate(); // Get the navigate function using useNavigate hook
+    const navigate = useNavigate();
 
     const handleChange = (e) => {
         if (e.target.name === 'image') {
@@ -36,7 +36,7 @@ function CreatePainting() {
             formData.append('image', paintingData.image);
 
             await addPainting(formData);
-            navigate('/paintings/'); // Redirect to homepage after successful creation
+            navigate('/paintings/');
         } catch (error) {
             console.error('Error creating new painting:', error);
         }
@@ -44,15 +44,14 @@ function CreatePainting() {
 
     const addPainting = async (formData) => {
         try {
-            const token = localStorage.getItem('token'); // Retrieve the token from local storage
-            const response = await axios.post('http://127.0.0.1:8000/painting/', formData, {
+            const token = localStorage.getItem('token');
+            const response = await axios.post(`${process.env.REACT_APP_API_URL}/painting/`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
-                    'Authorization': `Token ${token}` // Include the token in the request headers
+                    'Authorization': `Token ${token}`
                 }
             });
             console.log('New painting created:', response.data);
-            // Here you can update the state or perform any additional actions if needed
         } catch (error) {
             throw new Error(error);
         }

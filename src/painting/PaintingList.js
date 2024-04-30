@@ -28,7 +28,10 @@ function PaintingList() {
 
     const fetchPaintings = async (token) => {
         try {
-            const response = await axios.get('http://127.0.0.1:8000/painting/', {
+            const api_url = process.env.REACT_APP_API_URL;
+            
+            let complete_url = `${api_url}/painting/`; // Using backticks for template literal
+            const response = await axios.get(complete_url, {
                 headers: {
                     Authorization: `Token ${token}`,
                 },
@@ -44,7 +47,10 @@ function PaintingList() {
             const token = localStorage.getItem('token');
     
             // Check if the user has already liked the painting
-            const response = await axios.get(`http://127.0.0.1:8000/painting/${paintingID}/`, {
+            const api_url = process.env.REACT_APP_API_URL;
+            
+            let complete_url = `${api_url}/painting/${paintingID}/`; // Using backticks for template literal
+            const response = await axios.get(complete_url, {
                 headers: {
                     Authorization: `Token ${token}`,
                 },
@@ -59,9 +65,9 @@ function PaintingList() {
                 }));
                 return;
             }
-    
+            complete_url = `${api_url}/painting/${paintingID}/like/`; // Using backticks for template literal
             // If user has not already liked the painting, proceed with liking
-            await axios.post(`http://127.0.0.1:8000/painting/${paintingID}/like/`, {}, {
+            await axios.post(complete_url, {}, {
                 headers: {
                     Authorization: `Token ${token}`,
                 },
@@ -88,7 +94,6 @@ function PaintingList() {
             }));
         }
     };
-    
 
     const handleLogout = () => {
         localStorage.removeItem('token');
@@ -126,7 +131,7 @@ function PaintingList() {
                                                                 src={`http://localhost:8000${painting.image}`}
                                                                 alt={painting.Title}
                                                                 className="painting-image"/>
-                                                                </div>
+                                                        </div>
                                                     </Link>
                                                     <div className="d-flex align-items-center">
                                                         <button onClick={() => handleLike(painting.ID)} className="btn btn-like">

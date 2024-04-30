@@ -23,7 +23,7 @@ const CommentForm = ({ paintingId, setComments }) => {
                 text: text,
             };
 
-            const response = await axios.post(`http://127.0.0.1:8000/painting/${paintingId}/comment/`, formData, config);
+            const response = await axios.post(`${process.env.REACT_APP_API_URL}/painting/${paintingId}/comment/`, formData, config);
             setComments(prevComments => [...prevComments, response.data]);
             setText(''); // Clear the input field after submission
         } catch (error) {

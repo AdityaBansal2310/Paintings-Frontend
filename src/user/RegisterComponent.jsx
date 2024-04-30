@@ -9,7 +9,7 @@ const RegisterComponent = () => {
     });
     const [showErrorModal, setShowErrorModal] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
-    const [showSuccessModal, setShowSuccessModal] = useState(false); // Add state variable for success popup
+    const [showSuccessModal, setShowSuccessModal] = useState(false);
 
     const handleChange = e => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -18,7 +18,6 @@ const RegisterComponent = () => {
     const handleSubmit = async e => {
         e.preventDefault();
 
-        // Check if any field is empty
         if (!formData.username || !formData.email || !formData.password) {
             setErrorMessage('Please enter all the required fields.');
             setShowErrorModal(true);
@@ -26,22 +25,19 @@ const RegisterComponent = () => {
         }
 
         try {
-            const response = await axios.post('http://localhost:8000/api/register/', formData);
+            const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/register/`, formData);
             console.log(response.data);
-            // If registration is successful, show success modal
-            setShowErrorModal(false); // Hide error modal if it was previously shown
+            setShowErrorModal(false);
             setShowSuccessModal(true);
         } catch (error) {
             console.error(error);
             if (error.response.status === 409) {
-                // If user already exists, show error modal
                 setErrorMessage('User with the same username or email already exists.');
-                setShowSuccessModal(false); // Hide success modal if it was previously shown
+                setShowSuccessModal(false);
                 setShowErrorModal(true);
             } else {
-                // For other errors, log the error and show a generic error message
-                setErrorMessage('User with the same username or email already exists.');
-                setShowSuccessModal(false); // Hide success modal if it was previously shown
+                setErrorMessage('An error occurred while registering.');
+                setShowSuccessModal(false);
                 setShowErrorModal(true);
             }
         }
@@ -62,14 +58,13 @@ const RegisterComponent = () => {
                         <div className="mb-3">
                             <input type="password" name="password" className="form-control" placeholder="Password" onChange={handleChange} />
                         </div>
-                        <div className="d-flex justify-content-center"> {/* Add this div for centering */}
+                        <div className="d-flex justify-content-center">
                             <button type="submit" className="btn btn-outline-primary">Register</button>
                         </div>
                     </form>
                 </div>
             </div>
 
-            {/* Error Modal */}
             <div className={`modal fade ${showErrorModal ? 'show' : ''}`} style={{ display: showErrorModal ? 'block' : 'none' }}>
                 <div className="modal-dialog modal-dialog-centered">
                     <div className="modal-content">
@@ -87,7 +82,6 @@ const RegisterComponent = () => {
                 </div>
             </div>
 
-            {/* Success Modal */}
             <div className={`modal fade ${showSuccessModal ? 'show' : ''}`} style={{ display: showSuccessModal ? 'block' : 'none' }}>
                 <div className="modal-dialog modal-dialog-centered">
                     <div className="modal-content">
