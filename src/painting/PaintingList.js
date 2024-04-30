@@ -128,7 +128,7 @@ function PaintingList() {
                                                     <Link to={`/painting/${painting.ID}`}>
                                                         <div className="painting-image-container">
                                                             <img
-                                                                src={`http://localhost:8000${painting.image}`}
+                                                                src={`${process.env.REACT_APP_API_URL}${painting.image}`}
                                                                 alt={painting.Title}
                                                                 className="painting-image"/>
                                                         </div>
